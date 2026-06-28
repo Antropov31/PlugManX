@@ -1,8 +1,8 @@
 name: PlugManX
 main: bukkit.com.rylinaux.plugman.PlugManBukkit
 version: ${plugman.version}
-description: Plugin manager for Bukkit servers
-authors: [ rylinaux, TestAccount666 ]
+description: Plugin manager for Bukkit servers (Purpur 26.2 fix fork by Antropov31)
+authors: [ rylinaux, TestAccount666, Antropov31 ]
 api-version: 1.13
 folia-supported: true
 provides: [ PlugMan ]
@@ -21,9 +21,9 @@ commands:
     usage: /plugman (help|dump)
       /plugman list [-v]
       /plugman check <plugin|all> [-f]
-      /plugman lookup <command>
+      /plugman lookup 
       /plugman (enable|disable|restart) <plugin|all>
-      /plugman (info|usage|load|reload|unload) <plugin>
+      /plugman (info|usage|load|reload|unload) 
 permissions:
   plugman.admin:
     description: Allows use of all PlugMan commands.
