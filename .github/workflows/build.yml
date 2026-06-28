@@ -5,6 +5,9 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,8 +27,8 @@ jobs:
         run: mvn -B install -N
 
       # Generate the ca.bkaw:paper-nms dependency into the local Maven repo.
-      # This artifact is not published to any remote repo; it must be produced
-      # locally via the paper-nms-maven-plugin before the reactor build runs.
+      # This artifact is not published anywhere; it must be produced locally
+      # via the paper-nms-maven-plugin before the reactor build runs.
       - name: Initialize paper-nms
         working-directory: plugman-paper
         run: mvn -B paper-nms:init
@@ -33,11 +36,23 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean package
 
-      - name: Upload built jars
-        uses: actions/upload-artifact@v4
+      # Find the single final jar from the assembly module and give it a clean name.
+      - name: Locate final jar
+        id: jar
+        run: |
+          FILE=$(ls plugman-assembly/target/*.jar | grep -v 'original-' | head -n 1)
+          echo "Found: $FILE"
+          cp "$FILE" PlugManX-Purpur26.2-Antropov31.jar
+          echo "path=PlugManX-Purpur26.2-Antropov31.jar" >> "$GITHUB_OUTPUT"
+
+      # Publish that one jar to a Release. The 'latest' tag is force-updated each build.
+      - name: Publish to Releases
+        uses: softprops/action-gh-release@v2
         with:
-          name: PlugManX-jars
-          path: |
-            **/target/*.jar
-            !**/target/original-*.jar
-          if-no-files-found: error
+          tag_name: latest
+          name: PlugManX (Purpur 26.2 Fix)
+          body: |
+            Fork of PlugManX by Antropov31 with the Purpur 26.2 NumberFormatException fix.
+            Just download the jar below and drop it into your server's plugins folder.
+          files: ${{ steps.jar.outputs.path }}
+          make_latest: true
