@@ -2,7 +2,7 @@ name: PlugManX
 main: bukkit.com.rylinaux.plugman.PlugManBukkit
 version: ${plugman.version}
 description: Plugin manager for Bukkit servers (Purpur 26.2 fix fork by Antropov31)
-authors: [ rylinaux, TestAccount666, Antropov31 ]
+authors: [ rylinaux, TestAccount666, "Fork Antropov31" ]
 api-version: 1.13
 folia-supported: true
 provides: [ PlugMan ]
