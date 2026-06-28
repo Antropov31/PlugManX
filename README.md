@@ -1,4 +1,18 @@
-<h1 style="text-align: center;"> This is a PlugMan *Fork*</h1>
+# PlugManX (Purpur 26.2 Fix Fork)
+
+> **This is a fork of [PlugManX](https://github.com/Test-Account666/PlugManX) maintained by [Antropov31](https://github.com/Antropov31).**
+>
+> **What this fork fixes:** On Purpur 26.2 (experimental builds) the plugin crashed on enable with
+> `java.lang.NumberFormatException: For input string: "build"`. The server version string
+> (`26.2.build.2600-experimental`) contains non-numeric segments that the original `obtainVersion()`
+> tried to parse directly with `Integer.parseInt`. This fork parses only the leading digits of each
+> version segment, so PlugManX now enables correctly on Purpur 26.2 and similar experimental builds.
+>
+> Fix author: **Antropov31**
+
+---
+
+This is a PlugMan *Fork* 
 
 # PlugMan
 
@@ -20,50 +34,50 @@ the need to restart the server.
 
 ## Commands
 
-| Command                               | Description                                                       |
+| Command | Description |
 |---------------------------------------|-------------------------------------------------------------------|
-| /plugman help                         | Show help information.                                            |
-| /plugman list [-v]                    | List plugins in alphabetical order. Use "-v" to include versions. |
-| /plugman info [plugin]                | Displays information about a plugin.                              |
-| /plugman dump                         | Dump plugin names and version to a file.                          |
-| /plugman usage [plugin]               | List commands that a plugin has registered.                       |
-| /plugman lookup [command]             | Find the plugin a command is registered to.                       |
-| /plugman enable [plugin&#124;all]     | Enable a plugin.                                                  |
-| /plugman disable [plugin&#124;all]    | Disable a plugin.                                                 |
-| /plugman restart [plugin&#124;all]    | Restart (disable/enable) a plugin.                                |
-| /plugman load [plugin]                | Load a plugin.                                                    |
-| /plugman reload [plugin&#124;all]     | Reload (unload/load) a plugin.                                    |
-| /plugman unload [plugin]              | Unload a plugin.                                                  |
-| /plugman check [plugin&#124;all] [-f] | Check if a plugin is up-to-date.                                  |
+| /plugman help | Show help information. |
+| /plugman list [-v] | List plugins in alphabetical order. Use "-v" to include versions. |
+| /plugman info [plugin] | Displays information about a plugin. |
+| /plugman dump | Dump plugin names and version to a file. |
+| /plugman usage [plugin] | List commands that a plugin has registered. |
+| /plugman lookup [command] | Find the plugin a command is registered to. |
+| /plugman enable [plugin|all] | Enable a plugin. |
+| /plugman disable [plugin|all] | Disable a plugin. |
+| /plugman restart [plugin|all] | Restart (disable/enable) a plugin. |
+| /plugman load [plugin] | Load a plugin. |
+| /plugman reload [plugin|all] | Reload (unload/load) a plugin. |
+| /plugman unload [plugin] | Unload a plugin. |
+| /plugman check [plugin|all] [-f] | Check if a plugin is up-to-date. |
 
 ## Permissions
 
-| Permission Node     | Default | Description                           |
+| Permission Node | Default | Description |
 |---------------------|---------|---------------------------------------|
-| plugman.admin       | OP      | Allows use of all PlugMan commands.   |
-| plugman.update      | OP      | Allows user to see update messages.   |
-| plugman.help        | OP      | Allow use of the help command.        |
-| plugman.list        | OP      | Allow use of the list command.        |
-| plugman.info        | OP      | Allow use of the info command.        |
-| plugman.dump        | OP      | Allow use of the dump command.        |
-| plugman.usage       | OP      | Allow use of the usage command.       |
-| plugman.lookup      | OP      | Allow use of the lookup command.      |
-| plugman.enable      | OP      | Allow use of the enable command.      |
-| plugman.enable.all  | OP      | Allow use of the enable all command.  |
-| plugman.disable     | OP      | Allow use of the disable command.     |
-| plugman.disable.all | OP      | Allow use of the disable all command. |
-| plugman.restart     | OP      | Allow use of the restart command.     |
-| plugman.restart.all | OP      | Allow use of the restart all command. |
-| plugman.load        | OP      | Allow use of the load command.        |
-| plugman.reload      | OP      | Allow use of the reload command.      |
-| plugman.reload.all  | OP      | Allow use of the reload all command.  |
-| plugman.unload      | OP      | Allow use of the unload command.      |
-| plugman.check       | OP      | Allow use of the check command.       |
-| plugman.check.all   | OP      | Allow use of the check command.       |
+| plugman.admin | OP | Allows use of all PlugMan commands. |
+| plugman.update | OP | Allows user to see update messages. |
+| plugman.help | OP | Allow use of the help command. |
+| plugman.list | OP | Allow use of the list command. |
+| plugman.info | OP | Allow use of the info command. |
+| plugman.dump | OP | Allow use of the dump command. |
+| plugman.usage | OP | Allow use of the usage command. |
+| plugman.lookup | OP | Allow use of the lookup command. |
+| plugman.enable | OP | Allow use of the enable command. |
+| plugman.enable.all | OP | Allow use of the enable all command. |
+| plugman.disable | OP | Allow use of the disable command. |
+| plugman.disable.all | OP | Allow use of the disable all command. |
+| plugman.restart | OP | Allow use of the restart command. |
+| plugman.restart.all | OP | Allow use of the restart all command. |
+| plugman.load | OP | Allow use of the load command. |
+| plugman.reload | OP | Allow use of the reload command. |
+| plugman.reload.all | OP | Allow use of the reload all command. |
+| plugman.unload | OP | Allow use of the unload command. |
+| plugman.check | OP | Allow use of the check command. |
+| plugman.check.all | OP | Allow use of the check command. |
 
 ## Configuration
 
-| File       | URL                                                                                                |
+| File | URL |
 |------------|----------------------------------------------------------------------------------------------------|
 | config.yml | https://github.com/Test-Account666/PlugManX/blob/master/plugman-core/src/main/resources/config.yml |
 
@@ -75,7 +89,7 @@ Building PlugManX is simple:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Test-Account666/PlugManX.git
+   git clone https://github.com/Antropov31/PlugManX.git
    cd PlugManX
    ```
 2. **First Build**
@@ -92,8 +106,12 @@ Building PlugManX is simple:
    ```
 
 4. **Find the built artifacts:**
-    - Individual module JARs will be in each module's `target/` directory
-    - The assembled distribution will be in `plugman-assembly/target/`
+ - Individual module JARs will be in each module's `target/` directory
+ - The assembled distribution will be in `plugman-assembly/target/`
+
+> **Tip:** This fork also ships a GitHub Actions workflow (`.github/workflows/build.yml`) that builds
+> the jar automatically on every push. Grab the finished jar from the **Actions** tab → latest
+> **Build PlugManX** run → **Artifacts**, no local setup required.
 
 ## Version Management
 
@@ -141,6 +159,12 @@ dependencies {
     compileOnly 'com.rylinaux:PlugManX:${plugman.version}'
 }
 ```
+
+## Credits
+
+* Original PlugMan by **rylinaux**
+* PlugManX maintained by **Test-Account666**
+* Purpur 26.2 compatibility fix by **[Antropov31](https://github.com/Antropov31)**
 
 ## License
 
