@@ -56,8 +56,8 @@ public class PaperInitializer {
         }
 
         return obtainVersion() >= 12005 ?
-            new ModernPaperPluginManager() :
-            new PaperPluginManager();
+                new ModernPaperPluginManager() :
+                new PaperPluginManager();
     }
 
     /**
@@ -81,16 +81,35 @@ public class PaperInitializer {
 
     /**
      * Returns the Minecraft version integer id. 1.20 -> 12000, 1.21.4 -> 12104, 26.1 -> 260100.
+     * <p>
+     * Robust against non-numeric version segments (e.g. Purpur experimental builds report
+     * "26.2.build.2600-experimental", where "build" would otherwise blow up Integer.parseInt).
      */
     private int obtainVersion() {
         try {
             String[] versions = Bukkit.getMinecraftVersion().split("\\.");
-            return Integer.parseInt(versions[0]) * 10000
-                + (versions.length > 1 ? Integer.parseInt(versions[1]) : 0) * 100
-                + (versions.length > 2 ? Integer.parseInt(versions[2]) : 0);
+            int major = parseLeadingInt(versions[0]);
+            int minor = versions.length > 1 ? parseLeadingInt(versions[1]) : 0;
+            int patch = versions.length > 2 ? parseLeadingInt(versions[2]) : 0;
+            return major * 10000 + minor * 100 + patch;
         } catch (Exception ignored) {
             plugin.getLogger().warning("Failed to obtain server version!");
         }
         return -1;
+    }
+
+    /**
+     * Parses the leading run of digits from a version segment, returning 0 when none are present.
+     * This keeps version detection working on servers that append non-numeric tokens
+     * (e.g. "build", "2600-experimental") to the version string.
+     */
+    private int parseLeadingInt(String input) {
+        if (input == null) return 0;
+        StringBuilder digits = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) digits.append(c);
+            else break;
+        }
+        return digits.length() == 0 ? 0 : Integer.parseInt(digits.toString());
     }
 }
