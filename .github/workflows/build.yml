@@ -19,6 +19,17 @@ jobs:
           java-version: '21'
           cache: maven
 
+      # Install parent POM so module builds can resolve it
+      - name: Install parent POM
+        run: mvn -B install -N
+
+      # Generate the ca.bkaw:paper-nms dependency into the local Maven repo.
+      # This artifact is not published to any remote repo; it must be produced
+      # locally via the paper-nms-maven-plugin before the reactor build runs.
+      - name: Initialize paper-nms
+        working-directory: plugman-paper
+        run: mvn -B paper-nms:init
+
       - name: Build with Maven
         run: mvn -B clean package
 
